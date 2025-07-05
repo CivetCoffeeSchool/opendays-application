@@ -113,6 +113,9 @@ ClientBin/
 
 *.publishsettings
 
+# Migration
+Model\Migrations
+
 # RIA/Silverlight projects
 Generated_Code/
 
