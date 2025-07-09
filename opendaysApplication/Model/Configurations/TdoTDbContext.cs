@@ -9,7 +9,7 @@ using Model.Entities.Users;
 
 namespace Model.Configurations;
 
-public class PlaybookDbContext : DbContext
+public class TdoTDbContext : DbContext
 {
     public DbSet<AEvent> Events { get; set; }
     public DbSet<APerson> People { get; set; }
@@ -29,7 +29,7 @@ public class PlaybookDbContext : DbContext
     public DbSet<NormalUser> NormalUsers { get; set; }
     public DbSet<Assignment> Assignments { get; set; }
     
-    public PlaybookDbContext(DbContextOptions<PlaybookDbContext> options) : base(options) { }
+    public TdoTDbContext(DbContextOptions<TdoTDbContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -106,8 +106,11 @@ public class PlaybookDbContext : DbContext
             .WithMany(e=>e.OccupationUnits)
             .HasForeignKey(o=>o.EventName);
         
-
-
+        //Single Table inheritance
+        modelBuilder.Entity<AUser>()
+            .HasDiscriminator<string>("USER_TYPE")
+            .HasValue<Admin>("ADMIN")
+            .HasValue<NormalUser>("NORMAL");
         
 
     }
