@@ -1,14 +1,20 @@
-﻿using Model.Entities;
+﻿using Domain.Repositories.DTOs;
+using Model.Entities;
 using Model.Entities.EventRelated;
 using Model.Entities.OccupationUnits;
+using Model.Entities.Organisations;
 
 namespace Domain.Repositories.Interfaces;
 
 public interface IEventRepository: IRepository<AEvent>
 {
-    List<AEvent> GetEventsByType(string eventType);
+    List<TrialGroupEvent> GetTrialGroupEvents();
+    List<WorkshopEvent> GetWorkshopEvents();
     List<AEvent> GetUpcomingEvents(DateTime fromDate);
-    AEvent? GetEventWithDetails(int id);
-    List<Assignment> GetAssignmentsForEvent(int eventId);
-    List<Station> GetStationsForEvent(int eventId);
+    AEvent? GetEventWithDetails(string name);
+    List<Assignment> GetAssignmentsForEvent(string eventName);
+    List<AOccupationUnit> GetOccupationUnitsForEvent(string eventName);
+    
+    Specialization? GetSpecializationForStation(int stationId);
+    List<StationWithSpecializationDto> GetStationsWithSpecializations(string eventName);
 }

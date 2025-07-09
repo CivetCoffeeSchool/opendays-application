@@ -43,6 +43,8 @@ public abstract class ARepository<TEntity> : IRepository<TEntity> where TEntity:
     }
 
     public TEntity? Read(int id) => _Set.Find(id);//select * from T where id == id;
+    
+    public TEntity? Read(string id) => _Set.Find(id);//select * from T where id == id;
 
     public List<TEntity> Read(Expression<Func<TEntity, bool>> filter) => _Set.Where(filter).ToList();
 

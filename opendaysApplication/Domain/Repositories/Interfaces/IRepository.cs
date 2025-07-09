@@ -20,6 +20,8 @@ public interface IRepository<TEntity> where TEntity:class
     //Als Parameter wird eine ID Uebergeben. Der Rueckgabewert repr'esentiert
     //die entsprechende Entitaet, falls sie vorhanden ist
     TEntity? Read(int id);
+    
+    TEntity? Read(string id);
 
     // Die Methode erwartet als Parameter eine Filterfunktion, Der Filter
     // wird generisch auf die Daten der Abfrage angewandt und aknn je nach

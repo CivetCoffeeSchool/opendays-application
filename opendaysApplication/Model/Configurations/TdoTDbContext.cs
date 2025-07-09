@@ -69,6 +69,12 @@ public class TdoTDbContext : DbContext
             .HasForeignKey(a => new {a.OccupationUnitId, a.EventName});
 
         // Relationships
+        // Station - Specialization relationship
+        modelBuilder.Entity<Station>()
+            .HasOne(s => s.Specialization)
+            .WithMany()
+            .HasForeignKey(s => s.SpecializationName);
+        
         // Student - Class
         modelBuilder.Entity<Student>()
             .HasOne(s => s.Class)

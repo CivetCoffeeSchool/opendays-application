@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Model.Configurations;
 using Model.Entities;
 using Model.Entities.People;
 
 namespace Domain.Repositories.Implementations;
 
-public class PersonRepository : ARepository<APerson>
+public class PersonRepository : ARepository<APerson>, IPersonRepository
 {
     private readonly TdoTDbContext _dbContext;
     
