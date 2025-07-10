@@ -145,3 +145,10 @@ public class AuthService : IAuthService
 
 //TODO
 //Need to be fixed, for now commented
+// ,
+// "Jwt": {
+//     "Secret": "your-very-secure-secret-key-at-least-32-characters",
+//     "ExpiryMinutes": 60,
+//     "Issuer": "your-issuer",
+//     "Audience": "your-audience"
+// }
