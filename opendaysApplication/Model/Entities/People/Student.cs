@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.Entities.People;
-
+[Table("STUDENTS")]
 public class Student: APerson
 {
     [Required]
@@ -19,4 +19,6 @@ public class Student: APerson
     public int CurrentSchoolyearStart { get; set; }
     
     public Class Class { get; set; }
+    
+    public List<Assignment> Assignments { get; set; } = new();
 }

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.Entities.People;
-
+[Table("CLASSES")]
 public class Class
 {
     [Key]

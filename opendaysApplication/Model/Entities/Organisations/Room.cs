@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Model.Entities.OccupationUnits;
 
 namespace Model.Entities.Organisations;
-
+[Table("ROOMS")]
 public class Room
 {
     [Key]
@@ -21,5 +22,5 @@ public class Room
 
     public Location Location { get; set; }
     
-    public List<Assignment> Assignments { get; set; }
+    public List<Station> Stations { get; set; }= new();
 }

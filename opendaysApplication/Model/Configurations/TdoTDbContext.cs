@@ -5,6 +5,7 @@ using Model.Entities.EventRelated;
 using Model.Entities.OccupationUnits;
 using Model.Entities.Organisations;
 using Model.Entities.People;
+using Model.Entities.Rights;
 using Model.Entities.Users;
 
 namespace Model.Configurations;
@@ -25,9 +26,14 @@ public class TdoTDbContext : DbContext
     public DbSet<Class> Classes { get; set; }
     public DbSet<Student> Students { get; set; }
     public DbSet<Teacher> Teachers { get; set; }
+    public DbSet<TeacherLocation> TeacherLocations { get; set; }
     public DbSet<Admin> Admins { get; set; }
     public DbSet<NormalUser> NormalUsers { get; set; }
     public DbSet<Assignment> Assignments { get; set; }
+    
+    public DbSet<Functionality> Functionalities { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<Right> Rights { get; set; }
     
     public TdoTDbContext(DbContextOptions<TdoTDbContext> options) : base(options) { }
 
@@ -45,35 +51,60 @@ public class TdoTDbContext : DbContext
 
         modelBuilder.Entity<Assignment>()
             .HasKey(a => new { 
-                a.PersonId, 
-                a.RoomName, 
-                a.Location, 
+                a.StudentCode, 
                 a.EventName, 
                 a.OccupationUnitId 
             });
         
+        modelBuilder.Entity<TeacherLocation>()
+            .HasKey(t => new { t.TeacherCode, t.LocationName });
+
+        modelBuilder.Entity<Right>()
+            .HasKey(r => new { r.FunctionalityCode, r.RoleCode });
+        
         // Assignment Complex Relationships
         modelBuilder.Entity<Assignment>()
-            .HasOne(a => a.Person)
+            .HasOne(a => a.Student)
             .WithMany(p => p.Assignments)
-            .HasForeignKey(a => a.PersonId);
-        
-        modelBuilder.Entity<Assignment>()
-            .HasOne(a => a.Room)
-            .WithMany(r=>r.Assignments)
-            .HasForeignKey(a => new {a.RoomName, a.Location});
+            .HasForeignKey(a => a.StudentCode);
         
         modelBuilder.Entity<Assignment>()
             .HasOne(a => a.OccupationUnit)
             .WithMany(o => o.Assignments)
             .HasForeignKey(a => new {a.OccupationUnitId, a.EventName});
 
+        modelBuilder.Entity<TeacherLocation>()
+            .HasOne(t => t.Location)
+            .WithMany(l => l.LocationTeachers)
+            .HasForeignKey(t => t.LocationName);
+        
+        modelBuilder.Entity<TeacherLocation>()
+            .HasOne(t => t.Teacher)
+            .WithMany(t => t.TeacherLocations)
+            .HasForeignKey(t => t.TeacherCode);
+        
+        modelBuilder.Entity<Right>()
+            .HasOne(r => r.Functionality)
+            .WithMany(f=>f.Rights)
+            .HasForeignKey(r => r.FunctionalityCode);
+        
+        modelBuilder.Entity<Right>()
+            .HasOne(r => r.Role)
+            .WithMany(r => r.Rights)
+            .HasForeignKey(r => r.RoleCode);
+
         // Relationships
         // Station - Specialization relationship
         modelBuilder.Entity<Station>()
             .HasOne(s => s.Specialization)
-            .WithMany()
+            .WithMany(s => s.Stations)
             .HasForeignKey(s => s.SpecializationName);
+        
+        // Station - Room
+        modelBuilder.Entity<Station>()
+            .HasOne(s => s.Room)
+            .WithMany(r=>r.Stations)
+            .HasForeignKey(s => s.RoomName);
         
         // Student - Class
         modelBuilder.Entity<Student>()
@@ -103,14 +134,20 @@ public class TdoTDbContext : DbContext
         // Person - User
         modelBuilder.Entity<AUser>()
             .HasOne(u=>u.Person)
-            .WithMany(p=>p.Users)
-            .HasForeignKey(u=>u.PersonId);
+            .WithOne(p=>p.User)
+            .HasForeignKey<AUser>(u=>u.PersonCode);
         
         // OccupationUnit - Events
         modelBuilder.Entity<AOccupationUnit>()
             .HasOne(o=>o.Event)
             .WithMany(e=>e.OccupationUnits)
             .HasForeignKey(o=>o.EventName);
+        
+        // OccupationUnit - Teacher
+        modelBuilder.Entity<AOccupationUnit>()
+            .HasOne(o=>o.Teacher)
+            .WithMany(t=>t.OccupationUnits)
+            .HasForeignKey(o=>o.TeacherCode);
         
         //Single Table inheritance
         modelBuilder.Entity<AUser>()

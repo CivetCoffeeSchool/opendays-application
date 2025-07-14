@@ -67,8 +67,6 @@ public class EventRepository : ARepository<AEvent>, IEventRepository
     public List<Assignment> GetAssignmentsForEvent(string eventName)
     {
         return _dbContext.Assignments
-            .Include(a => a.Person)
-            .Include(a => a.Room)
             .Include(a => a.OccupationUnit)
             .Where(a => a.EventName == eventName)
             .ToList();
@@ -78,7 +76,6 @@ public class EventRepository : ARepository<AEvent>, IEventRepository
     {
         return _dbContext.OccupationUnits
             .Include(ou => ou.Assignments)
-            .ThenInclude(a => a.Person)
             .Where(s => s.EventName == eventName)
             .ToList();
     }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Model.Entities.People;
 
 namespace Model.Entities.Users;
-
+[Table("USERS_ST")]
 public abstract class AUser
 {
     [Key]
@@ -15,6 +15,6 @@ public abstract class AUser
     
     public APerson Person { get; set; }
     
-    [Column("PERSON_ID")]
-    public string PersonId { get; set; }
+    [Column("PERSON_CODE")]
+    public string PersonCode { get; set; }
 }

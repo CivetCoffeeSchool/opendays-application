@@ -5,6 +5,7 @@ using Model.Entities.EventRelated;
 
 namespace Model.Entities.OccupationUnits;
 
+[Table("CLASS_PERIODS")]
 public class ClassPeriod: AOccupationUnit
 {
     [Required]

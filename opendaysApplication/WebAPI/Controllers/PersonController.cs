@@ -41,7 +41,7 @@ public class PersonController: ControllerBase
             // Note: Since your Read method expects an int, but Person ID is string,
             // you'll need to either modify the repository or add a string-based Read method
             // For now, I'm using the filter expression approach
-            var person = _personRepository.Read(p => p.Id == id).FirstOrDefault();
+            var person = _personRepository.Read(p => p.Code == id).FirstOrDefault();
             
             if (person == null)
             {
@@ -68,7 +68,7 @@ public class PersonController: ControllerBase
             }
 
             var createdPerson = _personRepository.Create(person);
-            return CreatedAtAction(nameof(GetPersonById), new { id = createdPerson.Id }, createdPerson);
+            return CreatedAtAction(nameof(GetPersonById), new { id = createdPerson.Code }, createdPerson);
         }
         catch (Exception ex)
         {
@@ -82,12 +82,12 @@ public class PersonController: ControllerBase
     {
         try
         {
-            if (person == null || id != person.Id)
+            if (person == null || id != person.Code)
             {
                 return BadRequest("Invalid person data");
             }
 
-            var existingPerson = _personRepository.Read(p => p.Id == id).FirstOrDefault();
+            var existingPerson = _personRepository.Read(p => p.Code == id).FirstOrDefault();
             if (existingPerson == null)
             {
                 return NotFound();
@@ -108,7 +108,7 @@ public class PersonController: ControllerBase
     {
         try
         {
-            var person = _personRepository.Read(p => p.Id == id).FirstOrDefault();
+            var person = _personRepository.Read(p => p.Code == id).FirstOrDefault();
             if (person == null)
             {
                 return NotFound();

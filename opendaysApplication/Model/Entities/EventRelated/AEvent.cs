@@ -5,6 +5,7 @@ using Model.Entities.Organisations;
 
 namespace Model.Entities.EventRelated;
 
+[Table("EVENTS_BT")]
 public abstract class AEvent
 {
     [Key]

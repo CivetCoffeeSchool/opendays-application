@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Model.Entities.OccupationUnits;
 
 namespace Model.Entities.Organisations;
-
+[Table("SPECIALIZATIONS")]
 public class Specialization
 {
     [Key]
@@ -12,5 +13,7 @@ public class Specialization
     [Required]
     [Column("DESCRIPTION")]
     public string Description {get; set;}
+    
+    public List<Station> Stations { get; set; } = new();
     
 }

@@ -20,8 +20,7 @@ public class PersonRepository : ARepository<APerson>, IPersonRepository
         return _dbContext.Assignments
             .Include(a => a.OccupationUnit)
             .ThenInclude(ou => ou.Event)
-            .Include(a => a.Room)
-            .Where(a => a.PersonId == studentId)
+            .Where(a => a.PersonCode == studentId)
             .ToList();
     }
 

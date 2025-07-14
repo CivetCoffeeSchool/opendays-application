@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Ihiwzl7Fn2k=",
+  "dgSpecHash": "cL42UnZp4jE=",
   "success": true,
   "projectFilePath": "E:\\DATdoT\\opendays-application\\opendaysApplication\\Model\\Model.csproj",
   "expectedPackageFiles": [
@@ -51,7 +51,7 @@
       "code": "NU1903",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "包 \"Microsoft.Extensions.Caching.Memory\" 8.0.0 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-qj66-m88j-hmgj",
+      "message": "Package 'Microsoft.Extensions.Caching.Memory' 8.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-qj66-m88j-hmgj",
       "libraryId": "Microsoft.Extensions.Caching.Memory",
       "targetGraphs": [
         "net9.0"
@@ -61,7 +61,7 @@
       "code": "NU1903",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "包 \"System.Text.Json\" 8.0.0 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-8g4q-xg66-9fp4",
+      "message": "Package 'System.Text.Json' 8.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-8g4q-xg66-9fp4",
       "libraryId": "System.Text.Json",
       "targetGraphs": [
         "net9.0"
@@ -71,7 +71,7 @@
       "code": "NU1903",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "包 \"System.Text.Json\" 8.0.0 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-hh2w-p6rv-4g7w",
+      "message": "Package 'System.Text.Json' 8.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-hh2w-p6rv-4g7w",
       "libraryId": "System.Text.Json",
       "targetGraphs": [
         "net9.0"

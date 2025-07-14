@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Model.Entities.Users;
 
 namespace Model.Entities.People;
-
+[Table("PERSON_BT")]
 public abstract class APerson
 {
     [Key]
-    [Column("ID"),StringLength(10)]
-    public string Id { get; set; }
+    [Column("CODE"),StringLength(10)]
+    public string Code { get; set; }
 
     [Required]
     [Column("FORENAME"), StringLength(50)]
@@ -20,9 +20,7 @@ public abstract class APerson
 
     [Required]
     [Column("GENDER"), StringLength(1)]
-    public char Gender { get; set; }
+    public string Gender { get; set; }
     
-    public List<Assignment> Assignments { get; set; }
-    
-    public List<AUser> Users { get; set; }
+    public AUser User { get; set; }
 }
